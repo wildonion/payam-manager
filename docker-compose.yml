@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  payam-panel:
+    container_name: payam-panel
+    image: docker.sprun.ir/payam-panel
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    ports:
+      - "5065:8080"
+    networks:
+      - fms-services_db
+      - fms-services_gw
+
+networks:
+  host:
+  bridge:
+    fms-services_db: external:true
+    fms-services_gw: external:true
